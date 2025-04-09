@@ -21,9 +21,6 @@ function getHumanChoice (humanChoice) {
     else if (humanChoice.toLowerCase() == "scissors") {
         return "Scissors";
     }
-    else {
-        return "Invalid Choice";
-    }
 }
 
 function playRound (humanChoice, computerChoice) {
