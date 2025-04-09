@@ -74,39 +74,41 @@ function playRound (humanChoice, computerChoice) {
 }
 
 function playGame () {
-    const gameChoices = document.querySelector(".game-choices");
     const gameResults = document.createElement("div");
     gameChoices.appendChild(gameResults);
     gameChoices.addEventListener("click", (event) => {
-        let gameResultsText = document.createElement("p");
-        let roundWinner = playRound(getHumanChoice(event.target.id), getComputerChoice());
-        if (roundWinner === "Human") {
-            humanScore++;
-            gameResultsText.textContent += "You won this round. ";
-        }
-        else if (roundWinner === "Computer") {
-            computerScore++;
-            gameResultsText.textContent += "You lost this round. ";
-        }
-        else {
-            gameResultsText.textContent += "It was a tie. ";
-        }
-        gameResults.appendChild(gameResultsText);
-
-        if (humanScore === 5 || computerScore === 5) {
-            let gameWinner = document.createElement("div");
-            if (humanScore === 5) {
-                gameWinner.textContent += "You beat the computer! ";
+        if (humanScore < 5 && computerScore < 5) {
+            let gameResultsText = document.createElement("p");
+            let roundWinner = playRound(getHumanChoice(event.target.id), getComputerChoice());
+            if (roundWinner === "Human") {
+                humanScore++;
+                gameResultsText.textContent += "You won this round. ";
+            }
+            else if (roundWinner === "Computer") {
+                computerScore++;
+                gameResultsText.textContent += "You lost this round. ";
             }
             else {
-                gameWinner.textContent += "The computer bested you. ";
+                gameResultsText.textContent += "It was a tie. ";
             }
-            gameChoices.appendChild(gameWinner);
+            gameResults.appendChild(gameResultsText);
+
+            if (humanScore === 5 || computerScore === 5) {
+                let gameWinner = document.createElement("div");
+                if (humanScore === 5) {
+                    gameWinner.textContent += "You beat the computer! ";
+                }
+                else {
+                    gameWinner.textContent += "The computer bested you. ";
+                }
+                gameChoices.appendChild(gameWinner);
+            }
         }
     });
 }
 
 let humanScore = 0;
 let computerScore = 0;
+const gameChoices = document.querySelector(".game-choices");
 
 playGame();
