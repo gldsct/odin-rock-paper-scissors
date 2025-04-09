@@ -78,26 +78,30 @@ function playGame () {
     const gameResults = document.createElement("div");
     gameChoices.appendChild(gameResults);
     gameChoices.addEventListener("click", (event) => {
+        let gameResultsText = document.createElement("p");
         let roundWinner = playRound(getHumanChoice(event.target.id), getComputerChoice());
         if (roundWinner === "Human") {
             humanScore++;
-            gameResults.textContent += "\nYou won this round. ";
+            gameResultsText.textContent += "You won this round. ";
         }
         else if (roundWinner === "Computer") {
             computerScore++;
-            gameResults.textContent += "\nYou lost this round. ";
+            gameResultsText.textContent += "You lost this round. ";
         }
         else {
-            gameResults.textContent += "\nIt was a tie. ";
+            gameResultsText.textContent += "It was a tie. ";
         }
+        gameResults.appendChild(gameResultsText);
 
         if (humanScore === 5 || computerScore === 5) {
+            let gameWinner = document.createElement("div");
             if (humanScore === 5) {
-                gameResults.textContent += "\nYou beat the computer! ";
+                gameWinner.textContent += "You beat the computer! ";
             }
             else {
-                gameResults.textContent += "\nThe computer bested you. ";
+                gameWinner.textContent += "The computer bested you. ";
             }
+            gameChoices.appendChild(gameWinner);
         }
     });
 }
