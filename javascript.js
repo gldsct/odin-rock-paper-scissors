@@ -23,49 +23,16 @@ function getHumanChoice (humanChoice) {
 }
 
 function playRound (humanChoice, computerChoice) {
-    console.log("Human Choice: " + humanChoice);
-    console.log("Computer Choice: " + computerChoice);
-    if (humanChoice === "Rock") {
-        if (computerChoice === "Paper") {
-            console.log("You lose. Paper beats rock.");
-            return "Computer";
-        }
-        else if (computerChoice === "Scissors") {
-            console.log("You win. Rock beats scissors.");
-            return "Human";
-        }
-        else {
-            console.log("It was a tie.");
-            return "Draw";
-        }
+    if (humanChoice === computerChoice) {
+        return "Draw";
     }
-    else if (humanChoice === "Paper") {
-        if (computerChoice === "Rock") {
-            console.log("You win. Paper beats rock.");
-            return "Human";
-        }
-        else if (computerChoice === "Scissors") {
-            console.log("You lose. Scissors beat paper.");
-            return "Computer";
-        }
-        else {
-            console.log("It was a tie.");
-            return "Draw";
-        }
+
+    if (humanChoice === "Rock" && computerChoice === "Scissors" || humanChoice === "Paper" && computerChoice === "Rock" || humanChoice === "Scissors" && computerChoice === "Paper"){
+        return "Human";
     }
-    else if (humanChoice === "Scissors") {
-        if (computerChoice === "Rock") {
-            console.log("You lose. Rock beats scissors.");
-            return "Computer";
-        }
-        else if (computerChoice === "Paper") {
-            console.log("You win. Scissors beats paper.");
-            return "Human";
-        }
-        else {
-            console.log("It was a tie.");
-            return "Draw";
-        }
+
+    if (computerChoice === "Rock" && humanChoice === "Scissors" || computerChoice === "Paper" && humanChoice === "Rock" || computerChoice === "Scissors" && humanChoice === "Paper"){
+        return "Computer";
     }
 }
 
