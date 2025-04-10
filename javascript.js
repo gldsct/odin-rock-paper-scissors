@@ -52,28 +52,32 @@ const gameWinner = document.querySelector("#game-winner");
 const newGame = document.createElement("button");
 newGame.id = "new-game";
 newGame.textContent = "Start New Game?";
+newGame.style.cssText = "align-self: center;";
 
 gameChoices.addEventListener("click", (event) => {
+    gameHistory.style.cssText = "border: 1px solid #ADACB5; border-radius: 8px;";
     if (humanScore < 5 && computerScore < 5) {
-        let roundWinner = playRound(getHumanChoice(event.target.id), getComputerChoice());
+        let humanChoice = getHumanChoice(event.target.id);
+        let computerChoice = getComputerChoice();
+        let roundWinner = playRound(humanChoice, computerChoice);
         if (roundWinner === "Human") {
             humanScore++;
-            gameHistory.textContent += `You won this round.\n`;
+            gameHistory.textContent += `${humanChoice} beats ${computerChoice}. You won this round.\n`;
         }
         else if (roundWinner === "Computer") {
             computerScore++;
-            gameHistory.textContent += `You lost this round. \n`;
+            gameHistory.textContent += `${humanChoice} beats ${computerChoice}. You lost this round.\n`;
         }
         else {
-            gameHistory.textContent += `It was a tie. \n`;
+            gameHistory.textContent += `${humanChoice} ties ${computerChoice}. It was a draw.\n`;
         }
 
         if (humanScore === 5 || computerScore === 5) {
             if (humanScore === 5) {
-                gameWinner.textContent += `\nHuman: ${humanScore} / Computer: ${computerScore} \n\nYou beat the computer!`;
+                gameWinner.textContent += `\nFinal Score\nHuman: ${humanScore} / Computer: ${computerScore}\nYOU BEAT THE COMPUTER!`;
             }
             else {
-                gameWinner.textContent += `\nHuman: ${humanScore} / Computer: ${computerScore} \n\nThe computer bested you.`;
+                gameWinner.textContent += `\nFinal Score\nHuman: ${humanScore} / Computer: ${computerScore}\nThe computer bested you.`;
             }
             endGame();
         }
@@ -86,5 +90,6 @@ newGame.addEventListener("click", (event) => {
     computerScore = 0;
     gameHistory.textContent = "";
     gameWinner.textContent = "";
+    gameHistory.style.cssText = "border: 0";
     body.removeChild(newGame);
 });

@@ -9,6 +9,47 @@ html {
     font-family: "Trebuchet MS", sans-serif;
 }
 
+body {
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1, h2 {
+    padding: 8px;
+    text-align: center;
+}
+
+.game-choices {
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    font-size: 16px;
+}
+
+.game-results {
+    padding: 8px;
+    width: 500px;
+    margin: 0 auto;
+}
+
 p {
     white-space: pre-wrap;
+    font-size: 18px;
+}
+
+#game-history {
+    padding: 8px 0px 8px 72px;
+}
+
+#game-winner {
+    text-align: center;
+}
+
+button {
+    font-size: 18px;
+    padding: 4px 8px;
+    border-radius: 6px;
 }
