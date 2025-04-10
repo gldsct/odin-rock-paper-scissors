@@ -44,7 +44,7 @@ let humanScore = 0;
 let computerScore = 0;
 
 const body = document.querySelector("body");
-const gameChoices = document.querySelector(".game-choices");
+const gameChoices = document.querySelectorAll("button");
 const gameResults = document.querySelector(".game-results");
 const gameHistory = document.querySelector("#game-history");
 const gameWinner = document.querySelector("#game-winner");
@@ -54,34 +54,36 @@ newGame.id = "new-game";
 newGame.textContent = "Start New Game?";
 newGame.style.cssText = "align-self: center;";
 
-gameChoices.addEventListener("click", (event) => {
-    gameHistory.style.cssText = "border: 1px solid #ADACB5; border-radius: 8px;";
-    if (humanScore < 5 && computerScore < 5) {
-        let humanChoice = getHumanChoice(event.target.id);
-        let computerChoice = getComputerChoice();
-        let roundWinner = playRound(humanChoice, computerChoice);
-        if (roundWinner === "Human") {
-            humanScore++;
-            gameHistory.textContent += `${humanChoice} beats ${computerChoice}. You won this round.\n`;
-        }
-        else if (roundWinner === "Computer") {
-            computerScore++;
-            gameHistory.textContent += `${humanChoice} beats ${computerChoice}. You lost this round.\n`;
-        }
-        else {
-            gameHistory.textContent += `${humanChoice} ties ${computerChoice}. It was a draw.\n`;
-        }
-
-        if (humanScore === 5 || computerScore === 5) {
-            if (humanScore === 5) {
-                gameWinner.textContent += `\nFinal Score\nHuman: ${humanScore} / Computer: ${computerScore}\nYOU BEAT THE COMPUTER!`;
+gameChoices.forEach((button) => {
+    button.addEventListener("click", (event) => {
+        gameHistory.style.cssText = "border: 1px solid #ADACB5; border-radius: 8px;";
+        if (humanScore < 5 && computerScore < 5) {
+            let humanChoice = getHumanChoice(button.id);
+            let computerChoice = getComputerChoice();
+            let roundWinner = playRound(humanChoice, computerChoice);
+            if (roundWinner === "Human") {
+                humanScore++;
+                gameHistory.textContent += `${humanChoice} beats ${computerChoice}. You won this round.\n`;
+            }
+            else if (roundWinner === "Computer") {
+                computerScore++;
+                gameHistory.textContent += `${humanChoice} beats ${computerChoice}. You lost this round.\n`;
             }
             else {
-                gameWinner.textContent += `\nFinal Score\nHuman: ${humanScore} / Computer: ${computerScore}\nThe computer bested you.`;
+                gameHistory.textContent += `${humanChoice} ties ${computerChoice}. It was a draw.\n`;
             }
-            endGame();
+
+            if (humanScore === 5 || computerScore === 5) {
+                if (humanScore === 5) {
+                    gameWinner.textContent += `\nFinal Score\nHuman: ${humanScore} / Computer: ${computerScore}\nYOU BEAT THE COMPUTER!`;
+                }
+                else {
+                    gameWinner.textContent += `\nFinal Score\nHuman: ${humanScore} / Computer: ${computerScore}\nThe computer bested you.`;
+                }
+                endGame();
+            }
         }
-    }
+    });
 });
 
 newGame.addEventListener("click", (event) => {
