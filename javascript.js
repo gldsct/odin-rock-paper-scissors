@@ -1,24 +1,23 @@
 function getComputerChoice () {
-    let randomNumber = Math.floor((Math.random() * 10));
-    if (randomNumber < 3) {
-        return "Rock";
-    }
-    else if (randomNumber < 6) {
-        return "Paper";
-    }
-    else {
-        return "Scissors";
+    let randomNumber = Math.floor((Math.random() * 3));
+    switch (randomNumber) {
+        case 0:
+            return "Rock";
+        case 1:
+            return "Paper";
+        case 2:
+            return "Scissors";
     }
 }
 
 function getHumanChoice (humanChoice) {
-    if (humanChoice.toLowerCase() == "rock") {
+    if (humanChoice == "rock") {
         return "Rock";
     }
-    else if (humanChoice.toLowerCase() == "paper") {
+    else if (humanChoice == "paper") {
         return "Paper";
     }
-    else if (humanChoice.toLowerCase() == "scissors") {
+    else if (humanChoice == "scissors") {
         return "Scissors";
     }
 }
